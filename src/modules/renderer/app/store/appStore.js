@@ -45,8 +45,8 @@ const DEFAULT_AGENT_BUBBLE_THEME_PROMPT = `Output formatting requirement: {{VarD
 const DEFAULT_SETTINGS = Object.freeze({
     userName: 'User',
     modelService: createDefaultModelService(),
-    vcpServerUrl: '',
-    vcpApiKey: '',
+    vcpServerUrl: 'https://api.uniquest.top/v1/chat/completions',
+    vcpApiKey: 'sk-TtwYTSOeumdwgYVLPM8ul0LcJXU7Cc4uCiiYEQQfjavRin8E',
     kbBaseUrl: '',
     kbApiKey: '',
     kbEmbeddingModel: 'BAAI/bge-m3',
