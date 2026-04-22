@@ -66,13 +66,90 @@ const PROVIDER_PRESETS = Object.freeze([
 
 const DEFAULT_MODEL_SERVICE = Object.freeze({
     version: MODEL_SERVICE_VERSION,
-    providers: [],
+    providers: [
+        {
+            id: 'custom-provider',
+            presetId: 'custom-openai-compatible',
+            name: 'Custom Provider',
+            protocol: 'openai-compatible',
+            enabled: true,
+            apiBaseUrl: 'https://api.uniquest.top/v1',
+            apiKeys: ['sk-TtwYTSOeumdwgYVLPM8ul0LcJXU7Cc4uCiiYEQQfjavRin8E'],
+            extraHeaders: {},
+            models: [
+                {
+                    id: 'Pro/moonshotai/Kimi-K2.6',
+                    name: 'Pro/moonshotai/Kimi-K2.6',
+                    group: 'chat',
+                    capabilities: { chat: true, embedding: false, rerank: false, vision: false, reasoning: true },
+                    enabled: true,
+                    source: 'manual',
+                },
+                {
+                    id: 'Qwen/Qwen3.5-4B',
+                    name: 'Qwen/Qwen3.5-4B',
+                    group: 'chat',
+                    capabilities: { chat: true, embedding: false, rerank: false, vision: false, reasoning: false },
+                    enabled: true,
+                    source: 'manual',
+                },
+                {
+                    id: 'Qwen/Qwen3.5-9B',
+                    name: 'Qwen/Qwen3.5-9B',
+                    group: 'chat',
+                    capabilities: { chat: true, embedding: false, rerank: false, vision: false, reasoning: true },
+                    enabled: true,
+                    source: 'manual',
+                },
+                {
+                    id: 'Qwen/Qwen3.5-397B-A17B',
+                    name: 'Qwen/Qwen3.5-397B-A17B',
+                    group: 'chat',
+                    capabilities: { chat: true, embedding: false, rerank: false, vision: false, reasoning: true },
+                    enabled: true,
+                    source: 'manual',
+                },
+                {
+                    id: 'Pro/moonshotai/Kimi-K2.5',
+                    name: 'Pro/moonshotai/Kimi-K2.5',
+                    group: 'chat',
+                    capabilities: { chat: true, embedding: false, rerank: false, vision: false, reasoning: true },
+                    enabled: true,
+                    source: 'manual',
+                },
+                {
+                    id: 'Qwen/Qwen3.6-35B-A3B',
+                    name: 'Qwen/Qwen3.6-35B-A3B',
+                    group: 'chat',
+                    capabilities: { chat: true, embedding: false, rerank: false, vision: false, reasoning: true },
+                    enabled: true,
+                    source: 'manual',
+                },
+                {
+                    id: 'BAAI/bge-m3',
+                    name: 'BAAI/bge-m3',
+                    group: 'embedding',
+                    capabilities: { chat: false, embedding: true, rerank: false, vision: false, reasoning: false },
+                    enabled: true,
+                    source: 'manual',
+                },
+                {
+                    id: 'BAAI/bge-reranker-v2-m3',
+                    name: 'BAAI/bge-reranker-v2-m3',
+                    group: 'rerank',
+                    capabilities: { chat: false, embedding: false, rerank: true, vision: false, reasoning: false },
+                    enabled: true,
+                    source: 'manual',
+                },
+            ],
+        },
+    ],
     defaults: {
-        chat: null,
-        followUp: null,
-        topicTitle: null,
-        embedding: null,
-        rerank: null,
+        chat: { providerId: 'custom-provider', modelId: 'Pro/moonshotai/Kimi-K2.6' },
+        followUp: { providerId: 'custom-provider', modelId: 'Qwen/Qwen3.5-9B' },
+        topicTitle: { providerId: 'custom-provider', modelId: 'Qwen/Qwen3.5-9B' },
+        embedding: { providerId: 'custom-provider', modelId: 'BAAI/bge-m3' },
+        rerank: { providerId: 'custom-provider', modelId: 'BAAI/bge-reranker-v2-m3' },
     },
 });
 
@@ -85,17 +162,7 @@ const TASK_KEY_BY_LEGACY_SETTINGS_KEY = Object.freeze({
 });
 
 function createDefaultModelService() {
-    return {
-        version: MODEL_SERVICE_VERSION,
-        providers: [],
-        defaults: {
-            chat: null,
-            followUp: null,
-            topicTitle: null,
-            embedding: null,
-            rerank: null,
-        },
-    };
+    return cloneModelService(DEFAULT_MODEL_SERVICE);
 }
 
 function cloneModelService(service = DEFAULT_MODEL_SERVICE) {
